@@ -1,10 +1,10 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 import 'object_detect_screen.dart';
+import 'voice_register_screen.dart';
 
 List<CameraDescription> cameras = [];
 
@@ -28,6 +28,7 @@ class BlindAssistiveApp extends StatelessWidget {
   }
 }
 
+/// 👇 Ye class missing thi
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -53,18 +54,41 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  void openVoiceRegister() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const VoiceRegisterScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Blind Assistive App')),
       body: Center(
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            minimumSize: const Size(300, 70),
-            textStyle: const TextStyle(fontSize: 24),
-          ),
-          onPressed: openCamera,
-          child: const Text("Capture"),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(300, 70),
+                textStyle: const TextStyle(fontSize: 24),
+              ),
+              onPressed: openVoiceRegister,
+              child: const Text("Register with Voice"),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(300, 70),
+                textStyle: const TextStyle(fontSize: 24),
+              ),
+              onPressed: openCamera,
+              child: const Text("Capture"),
+            ),
+          ],
         ),
       ),
     );
